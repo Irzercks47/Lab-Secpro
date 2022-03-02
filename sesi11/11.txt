@@ -1,0 +1,32 @@
+bikin htaccess di folder controller
+supaya tidak bisa melihat isi folder bisa menggunakan Options -Indexes
+namun masih bisa melihat versi dari apache nya maka bisa menggunakan ErrorDocument 403 "Tidak boleh" yang dimana menggunakan code 403 dan memberi message tidak boleh supaya tidak bisa dilihat versinya
+untuk menunjukkan pages ErrorDocument 403 /Session11/error.php 
+pada saat bagian ini htaccess hanya untuk folder controller
+maka htaccess pindah kan ke session11 sehingga bisa berfungsi ke semua
+membolehkan IP bisa menggunakan Order Deny,Allow Allow from all Deny from 127.0.0.1
+berarti dia allow access untuk semua dan deny access dari localhost
+guna hot link prevention untuk tidak mengizinkan web lain menggunakan asset kita
+kalau ingin membiarkan orang lain menggunakna asset kita bisa menggunakan RewriteEngine dan gunanya adalah untuk modifikasi response yang akan diberikan kepada browser
+kalau buka jpg dan png maka forbidden
+isinya htaccess: 
+Options -Indexes
+
+ErrorDocument 403 /Session11/error.php 
+Order Deny,Allow 
+Allow from all 
+Deny from 127.0.0.1
+
+RewriteEngine on
+RewriteCond %{Http_REFERER} !^$
+RewriteCond %{Http_REFERER} !^http://localhost/Session11/.*$
+RewriteRule \.(jpg|png)$ - [F]
+
+note:
+saat quiz lgsg saja extract jangan dimasukkan suatu folder karena htaccess hanya bisa path yang absolut
+saat quiz sydah ada ht access jadi bisa kita modif sesuka kita
+
+review:
+session untuk menyimpan data tanpa harus menggunakan database stelahy destroy session maka kita harus regenerate session id nya
+password hashing 
+untuk echo username bisa menggunakan strip_tag

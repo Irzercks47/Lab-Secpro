@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pajak Penghasilan Jawa Timur</title>
+</head>
+<body>
+    <h1>Registration Pajak Penghasilan</h1>
+    <form action="connect.php" method="POST">
+        <table>
+            <tr>
+                <td>First Name</td>
+                <td><input type="text" name="firstname" id="firstname"></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><input type="text" name="lastname" id="lastname"></td>
+            </tr>
+            <tr>
+                <td>Birthplace</td>
+                <td><input type="text" name="birthplace" id="birthplace"></td>
+            </tr>
+            <tr>
+                <td>Birthdate</td>
+                <td><input type="date" name="birthdate" id="birthdate"></td>
+            </tr>
+            <tr>
+                <td>NIK KTP</td>
+                <td><input type="text" name="nik" id="nik"></td> 
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><input type="radio" name="gender" id="gender" value="male"> Male
+                    <input type="radio" name="gender" id="gender" value="female"> Female
+                </td>
+            </tr>
+            <tr>
+                <td>Married Status</td>
+                <td><input type="radio" name="status" id="status" value="yes"> Yes
+                    <input type="radio" name="status" id="status" value="no"> No
+                </td>
+            </tr>
+            <tr>
+                <td>NPWP</td>
+                <td><input type="text" name="npwp" id="npwp"></td>
+                <input type="hidden" name="_token" value="<?= csrf_token(); ?>" >
+            </tr>
+            <tr>
+                <td>Kelurahan</td>
+                <td><input type="text" name="kelurahan" id="kelurahan"></td>
+            </tr>
+            <tr>
+                <td>Kecamatan</td>
+                <td><input type="text" name="kecamatan" id="kecamatan"></td>
+            </tr>
+            <tr>
+                <td>Kota</td>
+                <td>
+                    <select name="kota" id="kota">
+                        <option value="jember">Jember</option>
+                        <option value="sidoarjo">Sidoarjo</option>
+                        <option value="malang">Malang</option>
+                        <option value="surabaya">Surabaya</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Provinsi</td>
+                <td>
+                    <select name="provinsi" id="provinsi">
+                        <option value="jawa_timur">Jawa Timur</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>1 Year Salary</td>
+                <td><input type="number" name="salary" id="salary"></td>
+            </tr>
+            <tr>
+                <td><input type="submit"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

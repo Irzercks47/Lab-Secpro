@@ -1,0 +1,20 @@
+stored xss
+disimpen di database
+payload disimpan di database
+reflected css 
+dikembalikan
+
+xss enak digunakan di tempat yang menghasilkan tampilan dari db
+bisa menggunakan reflected bila credential salah karena akan menampilkan error message dari server
+
+untuk solusi xss bisa menggunakan: 
+
+htmlentities = sebelum row content bisa menggunakan fungsi htmlentities 
+htmlspecialchars
+strip_tags 
+
+beda html entities akan menampilkan semua html nya sedangkan special char yang berhubungan dengan html akan diubah menjadi special char
+strip_tags akan menghilankan tags bisa diberi bebrapa pengecualian
+contoh: 
+strip_tags($row['content'],"<b>") maka bold bisa tampil / terkecuali
+strip_tags($row['content'],"<b><i>") bold dan italic terkecuali

@@ -1,0 +1,10 @@
+#Question 7 Section 1 OF 2: Apache Configuration 
+#Section Starts Here
+Options -Indexes
+#Section Ends Here
+
+
+#Question 7 Section 2 OF 2: Apache Configuration 
+#Section Starts Here
+ErrorDocument 403 /template/index.php 
+#Section Ends Here

@@ -1,0 +1,9 @@
+.jumbotron {
+    background: rgba(214, 214, 214, 0.8);
+    transition: 0.2s;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}

@@ -1,0 +1,11 @@
+.bg {
+    position: fixed;
+    z-index: -1;
+    width: 100%;
+    opacity: .75;
+    top: 0;
+}
+
+body {
+    background-color: black;
+}
